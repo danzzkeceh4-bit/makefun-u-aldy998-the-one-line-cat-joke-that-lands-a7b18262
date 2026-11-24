@@ -8,6 +8,11 @@ content matches the constant exactly. No network, no external input.
 
 import os
 
+# Why this joke: every cat owner has watched their cat deliberately
+# knock something off a table, then stare at the mess with total
+# innocence. The line leans into that shared image, lets the cat
+# blame gravity, and lands the twist at the end — the cat was only
+# the "supervisor", never the culprit.
 ENTRY = (
     "My cat knocked my coffee off the table, stared at the spill, and "
     "filed it under 'gravity did it, I merely supervised.'"
@@ -15,6 +20,13 @@ ENTRY = (
 
 
 def main() -> None:
+    """Write ENTRY to entry.txt and verify it byte-for-byte.
+
+    Gates the entry at 1-200 characters (the competition's length
+    rule) and rejects whitespace-only text, then writes the file with
+    no trailing newline and reads it back, asserting the content on
+    disk matches the constant exactly before reporting success.
+    """
     output_dir = os.environ.get("MAKEFUN_OUTPUT_DIR", "/output")
     output_path = os.environ.get("OUTPUT_PATH", os.path.join(output_dir, "entry.txt"))
     assert 1 <= len(ENTRY) <= 200, f"entry must be 1-200 chars, got {len(ENTRY)}"
